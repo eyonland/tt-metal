@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Valgrind",
+      "type": "shell",
+      "command": "valgrind",
+      "args": [
+        "--tool=callgrind",
+        "--callgrind-out-file=callgrind_output.txt",
+        "${workspaceFolder}/build/test/ttnn/unit_tests"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "set-pid-in-launch.json",
+      "type": "shell",
+      "command": "export DEBUG_PID=$(cat ~/DEBUG_PID.env)",
+      "problemMatcher": []
+    },
+    {
+      "label": "clean",
+      "type": "shell",
+      "command": "source /home/ubuntu/git/tt-metal/build/python_env/bin/activate && make clean",
+      "problemMatcher": []
+    },
+    {
+      "label": "nuke",
+      "type": "shell",
+      "command": "source /home/ubuntu/git/tt-metal/build/python_env/bin/activate && make nuke",
+      "problemMatcher": []
+    },
+    {
+      "label": "pytest",
+      "type": "shell",
+      "command": "source /home/ubuntu/git/tt-metal/build/python_env/bin/activate && python3 ${workspaceFolder}/tests/ttnn/utils_for_testing.py && ${workspaceFolder}/build/python_env/bin/pytest",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    }
+  ]
+}
